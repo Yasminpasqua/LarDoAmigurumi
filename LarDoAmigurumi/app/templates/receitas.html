@@ -14,6 +14,22 @@
         .navbar img {
             height: 70px; /* Ajuste a altura conforme necessário */
         }
+        /* Ajustando os cartões para melhor visualização */
+        .receita-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .receita-card h5 {
+            color: #8B4513; /* Marrom escuro */
+            font-weight: bold;
+        }
+        .receita-card p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -37,39 +53,29 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/sobrenos/">Sobre nós</a>
                 </li>
-                     <a class="nav-link text-dark" href="/admin/">Administração</a>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/">Administração</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <div class="container mt-5">
-        <h2 class="mb-4">Tabela de Receitas</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Materiais</th>
-                    <th scope="col">Quantidade de linha</th>
-                    <th scope="col">Passos</th>
-                    <th scope="col">Dificuldade</th>
-                    <th scope="col">Categoria</th>
-                   
-                </tr>
-            </thead>
-            <tbody>
-                {% for receita in receita %}
-                <tr>
-                    <td>{{ receita.nome }}</td>
-                    <td>{{ receita.materiais }}</td>
-                    <td>{{ receita.quantidade_linha }}</td>
-                    <td>{{ receita.passos }}</td>
-                    <td>{{ receita.dificuldade }}</td>
-                    <td>{{ receita.categoria}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h2 class="mb-4 text-center">Receitas de Amigurumi</h2>
+        
+        <!-- Loop para exibir as receitas em cartões -->
+        {% for receita in receita %}
+        <div class="receita-card">
+            <h5>{{ receita.nome }}</h5>
+            <p><strong>Materiais:</strong> {{ receita.materiais }}</p>
+            <p><strong>Quantidade de linha:</strong> {{ receita.quantidade_linha }}</p>
+            <p><strong>Passos:</strong> {{ receita.passos }}</p>
+            <p><strong>Dificuldade:</strong> {{ receita.dificuldade }}</p>
+            <p><strong>Categoria:</strong> {{ receita.categoria }}</p>
+        </div>
+        {% endfor %}
     </div>
+
     <!-- Incluindo jQuery e Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
