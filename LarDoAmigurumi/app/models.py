@@ -14,13 +14,6 @@ class Tipo_agulha(models.Model):
         class Meta:
             verbose_name = "Tipo_agulha"
             verbose_name_plural = "Tipo_agulhas"
-class Tipo_enchimento(models.Model):
-        nome = models.CharField(max_length=100, verbose_name="Nome")
-        def __str__(self):
-            return f"{self.nome}"
-        class Meta:
-            verbose_name = "Tipo_enchimento"
-            verbose_name_plural = "Tipo_enchimentos"
 class Marca_linha(models.Model):
         nome = models.CharField(max_length=100, verbose_name="Nome")
         def __str__(self):
@@ -39,9 +32,8 @@ class Cor(models.Model):
 class Agulha(models.Model):
         numero = models.IntegerField(verbose_name="Numero da agulha")
         tipo_agulha = models.ForeignKey('Tipo_agulha', on_delete=models.CASCADE, verbose_name="Tipo_agulha")
-        materiais = models.ForeignKey('Materiais', on_delete=models.CASCADE, verbose_name="Materiais" , related_name="agulhas_relacionadas")
         def __str__(self):
-            return self.Tipo_agulha.nome
+            return self.tipo_agulha.nome
         class Meta:
             verbose_name = "Agulha"
             verbose_name_plural = "Agulhas"
@@ -59,10 +51,9 @@ class Linha(models.Model):
             verbose_name = "Linha"
             verbose_name_plural = "Linhas"
 class Enchimento(models.Model):
-        quantidade = models.IntegerField(verbose_name="quantidade")
-        tipo_enchimento = models.ForeignKey('Tipo_enchimento', on_delete=models.CASCADE, verbose_name="Tipo_enchimento")
+        nome = models.CharField(max_length=100, verbose_name="Nome")
         def __str__(self):
-            return self.tipo_enchimento.nome
+            return f"{self.nome}"
 
         class Meta:
             verbose_name = "Enchimento"
@@ -74,12 +65,36 @@ class Materiais(models.Model):
         enchimento = models.ForeignKey('Enchimento', on_delete=models.CASCADE, verbose_name="Enchimento")
 
         def __str__(self):
-            return f"Linha: {self.linha.tipo_linha.nome}, Agulha: {self.agulha.tipo_agulha.nome}, Enchimento: {self.enchimento.tipo_enchimento.nome}"
+            return f"Linha: {self.linha.tipo_linha.nome}, Agulha: {self.agulha.tipo_agulha.nome}, Enchimento: {self.enchimento.nome}"
 
         
         class Meta:
             verbose_name = "Materiais"
-            verbose_name_plural = "Materiais"       
+            verbose_name_plural = "Materiais"
+            
+class Categoria(models.Model):
+    nome = models.CharField(max_length=100, verbose_name="Nome")
+    def __str__(self):
+        return f"{self.nome}"
+    class Meta:
+        verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"
+
+class Receita(models.Model):
+    nome = models.CharField(max_length=100, verbose_name="Nome")
+    materiais = models.ForeignKey('Materiais', on_delete=models.CASCADE, verbose_name="Materiais")
+    quantidade_linha = models.IntegerField(verbose_name="Quantidade de Linha")
+    passos = models.TextField(verbose_name="Passos")
+    dificuldade = models.CharField(max_length=50, verbose_name="Dificuldade")
+    categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE, verbose_name="Categoria")
+
+    def __str__(self):
+        return f"{self.nome}"
+
+    class Meta:
+        verbose_name = "Receita"
+        verbose_name_plural = "Receitas"
+
 
 
 
