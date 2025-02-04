@@ -9,4 +9,5 @@ urlpatterns = [
     path('materiais/', MateriaisView.as_view(), name='materiais'),
     path('receitas/', ReceitasView.as_view(), name='receitas'),
     path('sobrenos/', SobreNosView.as_view(), name='sobrenos'),
+    path('agulhas/', AgulhasView.as_view(), name='agulhas'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

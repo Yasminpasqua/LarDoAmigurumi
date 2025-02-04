@@ -21,3 +21,8 @@ class ReceitasView(View):
 class SobreNosView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'sobrenos.html')
+
+class AgulhasView(View):
+    def get(self, request, *args, **kwargs):
+        agulha = Agulha.objects.all()
+        return render(request, 'agulha.html', {'agulha': agulha})

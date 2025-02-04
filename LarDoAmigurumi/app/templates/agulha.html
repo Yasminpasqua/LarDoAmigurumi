@@ -14,26 +14,11 @@
         .navbar img {
             height: 70px; /* Ajuste a altura conforme necessário */
         }
-        /* Ajustando os cartões para melhor visualização */
-        .receita-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #fff;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .receita-card h5 {
-            color: #8B4513; /* Marrom escuro */
-            font-weight: bold;
-        }
-        .receita-card p {
-            margin: 5px 0;
-        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    
+        <nav class="navbar navbar-expand-lg navbar-dark">
         <img src="{% static 'LARDOAMIGURUMI (2).png' %}" alt="a">
         <a class="navbar-brand" href="/">LarDoAmigurumi</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,29 +41,31 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/sobrenos/">Sobre nós</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/admin/">Administração</a>
+                     <a class="nav-link text-dark" href="/admin/">Administração</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="container mt-5">
-        <h2 class="mb-4 text-center">Receitas de Amigurumi</h2>
-        
-        <!-- Loop para exibir as receitas em cartões -->
-        {% for receita in receita %}
-        <div class="receita-card">
-            <h5>{{ receita.nome }}</h5>
-            <p><strong>Materiais:</strong> {{ receita.materiais }}</p>
-            <p><strong>Quantidade de rolos de linha:</strong> {{ receita.quantidade_linha }}</p>
-            <p><strong>Passos:</strong> {{ receita.passos }}</p>
-            <p><strong>Dificuldade:</strong> {{ receita.dificuldade }}</p>
-            <p><strong>Categoria:</strong> {{ receita.categoria }}</p>
-        </div>
-        {% endfor %}
+        <h2 class="mb-4">Tabela de Agulhas</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Tipo de agulha</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for agulha in agulha %}
+                <tr>
+                    <td>{{ agulha.numero }}</td>
+                    <td>{{ agulha.tipo_agulha }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
     <!-- Incluindo jQuery e Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
